@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 
 type Column<Data> = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Datatable } from '../components';
 import { Center, Heading, VStack } from '@chakra-ui/react';
 
@@ -8,7 +8,7 @@ type Passenger = {
     age: number;
 };
 
-const FirstQuestion: React.FC = () => {
+const FirstQuestionPage: React.FC = (): ReactElement => {
     const column = [
         {
             key: 'id',
@@ -53,4 +53,4 @@ const FirstQuestion: React.FC = () => {
     );
 };
 
-export default FirstQuestion;
+export default FirstQuestionPage;
