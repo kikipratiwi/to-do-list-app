@@ -2,6 +2,8 @@ import React, { ReactElement } from 'react';
 import { Box, Button, Center, Stack } from '@chakra-ui/react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
+import './styles/globals.css';
+
 const App: React.FC = (): ReactElement => {
     const navigate = useNavigate();
 
