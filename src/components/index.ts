@@ -1,3 +1,4 @@
+export { default as ConfirmationModal } from './modal/Confirmation';
 export { default as Datatable } from './Datatable';
 export { default as HeadingText } from './HeadingText';
 export { default as Item } from './Item';
