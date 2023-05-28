@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import {
     Button,
-    Checkbox,
     Divider,
     FormControl,
     FormLabel,
@@ -15,7 +14,7 @@ import {
     VStack,
     useDisclosure,
 } from '@chakra-ui/react';
-import { CreateToDoModal } from '..';
+import { CreateToDoModal, ToDoCheckItem } from '..';
 
 type CreateTaskModalProps = {
     isOpen: boolean;
@@ -90,15 +89,12 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
                             <FormControl pt={2}>
                                 <FormLabel>Your To do(s)</FormLabel>
-                                <VStack pl={4} alignItems="start">
-                                    <Checkbox
-                                        size="sm"
-                                        value="naruto"
-                                        colorScheme="gray"
-                                        defaultChecked
-                                    >
-                                        Added to do will be here
-                                    </Checkbox>
+
+                                <VStack alignItems="start" w="full">
+                                    <ToDoCheckItem
+                                        label="Added to do item willl be appear here"
+                                        date={new Date()}
+                                    />
                                 </VStack>
                             </FormControl>
                         </VStack>

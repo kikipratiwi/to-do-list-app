@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import {
-    Box,
     Card,
     CardBody,
     CardHeader,
@@ -10,14 +9,13 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    Progress,
     Text,
     VStack,
     useDisclosure,
 } from '@chakra-ui/react';
 import { UilEllipsisV, UilFileCheckAlt } from '@iconscout/react-unicons';
 import { COLORS } from '../../constants';
-import { ConfirmationModal } from '..';
+import { ConfirmationModal, DetailTaskModal, TaskProgress } from '..';
 
 export type TaskCardProps = {
     description: string;
@@ -37,10 +35,16 @@ const TaskCard: React.FC<TaskCardProps> = ({
     totalTask,
 }: TaskCardProps): ReactElement => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+        isOpen: isDetailTaskOpen,
+        onOpen: onOpenDetailTask,
+        onClose: onCloseDetailTask,
+    } = useDisclosure();
 
     return (
         <>
             <Card
+                onClick={onOpenDetailTask}
                 key={1}
                 bgColor={isOdd ? 'black' : 'white'}
                 borderRadius={12}
@@ -103,29 +107,17 @@ const TaskCard: React.FC<TaskCardProps> = ({
                             </Text>
                         </HStack>
 
-                        <VStack w="full">
-                            <HStack w="full" justifyContent="space-between">
-                                <Text fontWeight="bold">Progress</Text>
-                                <Text fontWeight="bold" color={COLORS.yellow}>
-                                    {progress}%
-                                </Text>
-                            </HStack>
-
-                            <Box w="full">
-                                <Progress
-                                    size="sm"
-                                    borderRadius={12}
-                                    colorScheme="yellow"
-                                    bgColor="#fde9b3"
-                                    value={progress}
-                                />
-                            </Box>
-                        </VStack>
+                        <TaskProgress progress={progress} />
                     </VStack>
                 </CardBody>
             </Card>
 
             <ConfirmationModal isOpen={isOpen} onClose={onClose} />
+
+            <DetailTaskModal
+                isOpen={isDetailTaskOpen}
+                onClose={onCloseDetailTask}
+            />
         </>
     );
 };
