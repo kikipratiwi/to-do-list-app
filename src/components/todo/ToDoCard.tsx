@@ -29,7 +29,7 @@ const ToDoCard: React.FC<ToDoCardProps> = ({
     isComplete,
 }: ToDoCardProps): ReactElement => {
     return (
-        <HStack h={isFirst ? '170px' : '100px'} spacing={4}>
+        <HStack h={isFirst ? '170px' : '125px'} spacing={4}>
             <VStack h="full">
                 <Box
                     w="13px"
