@@ -55,7 +55,7 @@ const Search: React.FC = (): ReactElement => {
                                 h="full"
                                 w="40px"
                             >
-                                <UilSearch color="black" size={22} />
+                                <UilSearch size={22} />
                             </InputLeftElement>
                             <Input
                                 autoFocus={false}

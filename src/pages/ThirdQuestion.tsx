@@ -72,7 +72,7 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                                     borderRadius={12}
                                     variant="solid"
                                     bgColor={COLORS.yellow}
-                                    aria-label="Play"
+                                    aria-label="Stopwatch"
                                     icon={<UilStopwatch color="black" />}
                                 />
                             </HStack>
@@ -81,7 +81,7 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                 </HStack>
 
                 <HStack alignItems="start" w="full" flexGrow={1} spacing={16}>
-                    <Box w="55%" pr={10}>
+                    <Box w="55%">
                         <MyTasks />
                     </Box>
 

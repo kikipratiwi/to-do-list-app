@@ -108,9 +108,9 @@ const ToDoCard: React.FC<ToDoCardProps> = ({
                                 borderRadius={12}
                                 variant="outline"
                                 bgColor={isComplete ? COLORS.yellow : 'white'}
-                                aria-label="Play"
+                                aria-label="Check"
                                 outline={12}
-                                icon={<UilCheck color="black" />}
+                                icon={<UilCheck />}
                                 _hover={{}}
                             />
                         </HStack>

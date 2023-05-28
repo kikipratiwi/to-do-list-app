@@ -45,14 +45,23 @@ const MyTasks: React.FC = (): ReactElement => {
                 </ButtonGroup>
             </HStack>
 
-            <VStack alignItems="start" w="full" flexGrow={1} spacing={5}>
+            <VStack
+                alignItems="start"
+                w="full"
+                flex={1}
+                spacing={5}
+                p={3}
+                pr={10}
+                maxHeight="358px"
+                overflowY="auto"
+            >
                 {dummyData?.length > 0 &&
                     dummyData.map(
                         ({ ...task }: TaskCardProps, index: number) => {
                             return (
                                 <TaskCard
                                     key={'task' + index}
-                                    isOdd={index % 2 !== 0}
+                                    isOdd={(index + 1) % 2 === 0}
                                     {...task}
                                 />
                             );

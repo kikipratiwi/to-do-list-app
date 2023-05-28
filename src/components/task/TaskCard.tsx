@@ -10,7 +10,7 @@ import {
     Text,
     VStack,
 } from '@chakra-ui/react';
-import { UilEllipsisV } from '@iconscout/react-unicons';
+import { UilEllipsisV, UilFileCheckAlt } from '@iconscout/react-unicons';
 import { COLORS } from '../../constants';
 
 export type TaskCardProps = {
@@ -23,10 +23,12 @@ export type TaskCardProps = {
 };
 
 const TaskCard: React.FC<TaskCardProps> = ({
-    title,
     description,
-    progress,
     isOdd,
+    progress,
+    title,
+    totalCompletedTask,
+    totalTask,
 }: TaskCardProps): ReactElement => {
     return (
         <Card
@@ -61,27 +63,40 @@ const TaskCard: React.FC<TaskCardProps> = ({
             </CardHeader>
 
             <CardBody pt={0}>
-                <Text color={COLORS.gray} fontWeight={500} w="90%">
-                    {description}
-                </Text>
+                <VStack spacing={4} alignItems="start">
+                    <Text color={COLORS.gray} fontWeight={500} w="90%">
+                        {description}
+                    </Text>
 
-                <VStack w="full" pt={5}>
-                    <HStack w="full" justifyContent="space-between">
-                        <Text fontWeight="bold">Progress</Text>
-                        <Text fontWeight="bold" color={COLORS.yellow}>
-                            {progress}%
+                    <HStack>
+                        <UilFileCheckAlt color={isOdd ? 'white' : 'gray'} />
+                        <Text
+                            color={isOdd ? 'white' : 'blackAlpha.600'}
+                            fontWeight={500}
+                            fontSize="sm"
+                        >
+                            {totalCompletedTask} task / {totalTask} task
                         </Text>
                     </HStack>
 
-                    <Box w="full">
-                        <Progress
-                            size="sm"
-                            borderRadius={12}
-                            colorScheme="yellow"
-                            bgColor="#fde9b3"
-                            value={progress}
-                        />
-                    </Box>
+                    <VStack w="full">
+                        <HStack w="full" justifyContent="space-between">
+                            <Text fontWeight="bold">Progress</Text>
+                            <Text fontWeight="bold" color={COLORS.yellow}>
+                                {progress}%
+                            </Text>
+                        </HStack>
+
+                        <Box w="full">
+                            <Progress
+                                size="sm"
+                                borderRadius={12}
+                                colorScheme="yellow"
+                                bgColor="#fde9b3"
+                                value={progress}
+                            />
+                        </Box>
+                    </VStack>
                 </VStack>
             </CardBody>
         </Card>

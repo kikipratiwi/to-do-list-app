@@ -27,7 +27,16 @@ const MyToDos: React.FC = (): ReactElement => {
 
     return (
         <VStack alignItems="start" spacing="22px" w="full">
-            <VStack alignItems="start" w="full" flexGrow={1} spacing={5}>
+            <VStack
+                alignItems="start"
+                w="full"
+                flexGrow={1}
+                spacing={5}
+                p={3}
+                pr={10}
+                maxHeight="290px"
+                overflowY="scroll"
+            >
                 {dummyData?.length > 0 &&
                     dummyData.map(
                         ({ ...task }: ToDoCardProps, index: number) => {
