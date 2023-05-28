@@ -54,18 +54,19 @@ const ToDoCard: React.FC<ToDoCardProps> = ({
             <Box pt={2}>
                 <Card
                     key={1}
+                    bgColor={isFirst ? COLORS.yellow : 'transparent'}
+                    borderRadius={12}
                     boxShadow={
                         isFirst
                             ? 'rgba(17, 17, 26, 0.1) 0px 4px 12px, rgba(17, 17, 26, 0.05) 0px 4px 10px;'
                             : 'none'
                     }
-                    bgColor={isFirst ? COLORS.yellow : 'white'}
-                    borderRadius={12}
                     color="black"
-                    pt={2}
                     pb={isFirst ? 2 : 0}
+                    pt={2}
                     px={4}
                     size="sm"
+                    variant="filled"
                     w="full"
                 >
                     <CardHeader pb={0}>
