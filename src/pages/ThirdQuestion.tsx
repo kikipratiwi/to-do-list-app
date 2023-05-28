@@ -65,10 +65,10 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                             <HStack w="full" justifyContent="space-between">
                                 <Box>
                                     <Text fontWeight="bold" color="black">
-                                        Project time tracker
+                                        Task time tracker
                                     </Text>
                                     <Text color={COLORS.gray} fontWeight={500}>
-                                        You can start tarcking your project here
+                                        You can start tarcking your task here
                                     </Text>
                                 </Box>
 
