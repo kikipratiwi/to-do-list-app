@@ -7,6 +7,8 @@ import pieGraphIcon from '../assets/icons/pie-graph.png';
 import settingsIcon from '../assets/icons/setting.png';
 import teamworkIcon from '../assets/icons/teamwork.png';
 
+import { COLORS } from '../constants';
+
 type NavigationType = {
     active: boolean;
     label: string;
@@ -63,7 +65,7 @@ const NavBar: React.FC = (): ReactElement => {
                             w="250px"
                             {...(active && {
                                 _hover: {
-                                    bgColor: 'gray.200',
+                                    bgColor: COLORS.gray,
                                     color: 'black',
                                 },
                             })}

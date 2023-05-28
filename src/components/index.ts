@@ -1,4 +1,3 @@
-export { default as ConfirmationModal } from './modal/Confirmation';
 export { default as Datatable } from './Datatable';
 export { default as HeadingText } from './HeadingText';
 export { default as Item } from './Item';
@@ -7,7 +6,9 @@ export { default as Search } from './Search';
 export { default as SideBar } from './SideBar';
 export { default as ThisWeek } from './ThisWeek';
 export { default as TopBar } from './TopBar';
+export { default as ConfirmationModal } from './modal/Confirmation';
 export { default as CreateTaskModal } from './modal/CreateTask';
+export { default as CreateToDoModal } from './modal/CreateToDo';
 export { default as DetailTaskModal } from './modal/DetailTask';
 export { default as MyTasks } from './task/MyTasks';
 export { default as TaskCard } from './task/TaskCard';

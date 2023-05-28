@@ -6,11 +6,13 @@ import {
     IconButton,
     Text,
     VStack,
+    useDisclosure,
 } from '@chakra-ui/react';
 import { UilStopwatch, UilPlus } from '@iconscout/react-unicons';
 import moment from 'moment';
 
 import {
+    CreateTaskModal,
     HeadingText,
     MyTasks,
     MyToDos,
@@ -22,6 +24,8 @@ import {
 import { COLORS } from '../constants';
 
 const ThirdQuestionPage: React.FC = (): ReactElement => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <HStack
             textColor={COLORS.gray}
@@ -106,6 +110,7 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                                 borderRadius={12}
                                 fontSize={14}
                                 p={8}
+                                onClick={onOpen}
                                 _hover={{
                                     bgColor: COLORS.gray,
                                 }}
@@ -120,6 +125,8 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                     </VStack>
                 </HStack>
             </VStack>
+
+            <CreateTaskModal isOpen={isOpen} onClose={onClose} />
         </HStack>
     );
 };

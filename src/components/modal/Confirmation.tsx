@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react';
 import {
     Button,
     Modal,
@@ -7,9 +8,11 @@ import {
     ModalHeader,
     ModalOverlay,
 } from '@chakra-ui/react';
-import React, { ReactElement } from 'react';
 
-type ConfirmationModalProps = { isOpen: boolean; onClose: () => void };
+type ConfirmationModalProps = {
+    isOpen: boolean;
+    onClose: () => void;
+};
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     isOpen,
