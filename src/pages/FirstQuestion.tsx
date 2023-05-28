@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Datatable } from '../components';
-import { Center, Heading, VStack } from '@chakra-ui/react';
+import { Center, VStack } from '@chakra-ui/react';
 
 type Passenger = {
     id: string;
@@ -45,8 +45,7 @@ const FirstQuestionPage: React.FC = (): ReactElement => {
 
     return (
         <Center>
-            <VStack w="60vw" spacing={10}>
-                <Heading>First Question</Heading>
+            <VStack w="60vw">
                 <Datatable<Passenger> columns={column} data={passengers} />;
             </VStack>
         </Center>
