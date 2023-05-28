@@ -2,6 +2,9 @@ import { ReactElement } from 'react';
 import {
     Box,
     Button,
+    Card,
+    CardBody,
+    Divider,
     Input,
     InputGroup,
     InputLeftElement,
@@ -9,14 +12,22 @@ import {
     ModalBody,
     ModalContent,
     ModalOverlay,
+    Text,
+    VStack,
     useDisclosure,
 } from '@chakra-ui/react';
 import { COLORS } from '../constants';
 
 import { UilSearch } from '@iconscout/react-unicons';
+import { DetailTaskModal } from '.';
 
 const Search: React.FC = (): ReactElement => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+        isOpen: isDetailTaskOpen,
+        onOpen: onOpenDetailTask,
+        onClose: onCloseDetailTask,
+    } = useDisclosure();
 
     return (
         <>
@@ -45,7 +56,7 @@ const Search: React.FC = (): ReactElement => {
                 </Button>
             </Box>
 
-            <Modal isOpen={isOpen} onClose={onClose} size="lg">
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
                 <ModalOverlay />
                 <ModalContent borderRadius={12}>
                     <ModalBody>
@@ -73,6 +84,7 @@ const Search: React.FC = (): ReactElement => {
                                 size="lg"
                                 type="text"
                                 variant="filled"
+                                _hover={{}}
                                 _focus={{
                                     border: 'none',
                                     boxShadow: 'none',
@@ -80,10 +92,78 @@ const Search: React.FC = (): ReactElement => {
                                 _placeholder={{ color: COLORS.gray }}
                             />
                         </InputGroup>
-                        {/* <Divider /> */}
+
+                        <VStack w="full" spacing={4} pb={4}>
+                            <Divider />
+
+                            <Card
+                                onClick={onOpenDetailTask}
+                                cursor="pointer"
+                                variant="elevated"
+                                bg={COLORS.semigray}
+                                _hover={{ bg: COLORS.yellow, color: 'black' }}
+                                p={2}
+                                w="full"
+                                size="sm"
+                            >
+                                <CardBody p={0}>
+                                    <VStack
+                                        alignItems="start"
+                                        spacing={0}
+                                        pl={2}
+                                    >
+                                        <Text fontSize="sm" fontWeight={500}>
+                                            Task
+                                        </Text>
+
+                                        <Text
+                                            fontWeight="semibold"
+                                            fontSize="xl"
+                                        >
+                                            Result #1
+                                        </Text>
+                                    </VStack>
+                                </CardBody>
+                            </Card>
+
+                            <Card
+                                onClick={onOpenDetailTask}
+                                cursor="pointer"
+                                variant="elevated"
+                                bg={COLORS.semigray}
+                                _hover={{ bg: COLORS.yellow, color: 'black' }}
+                                p={2}
+                                w="full"
+                                size="sm"
+                            >
+                                <CardBody p={0}>
+                                    <VStack
+                                        alignItems="start"
+                                        spacing={0}
+                                        pl={2}
+                                    >
+                                        <Text fontSize="sm" fontWeight={500}>
+                                            To Do
+                                        </Text>
+
+                                        <Text
+                                            fontWeight="semibold"
+                                            fontSize="xl"
+                                        >
+                                            Result #2
+                                        </Text>
+                                    </VStack>
+                                </CardBody>
+                            </Card>
+                        </VStack>
                     </ModalBody>
                 </ModalContent>
             </Modal>
+
+            <DetailTaskModal
+                isOpen={isDetailTaskOpen}
+                onClose={onCloseDetailTask}
+            />
         </>
     );
 };
