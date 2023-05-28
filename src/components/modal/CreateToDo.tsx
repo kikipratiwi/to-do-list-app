@@ -65,36 +65,6 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
                                 }}
                             />
                         </FormControl>
-
-                        <HStack w="full">
-                            <FormControl>
-                                <FormLabel>Start</FormLabel>
-
-                                <Input
-                                    borderRadius={12}
-                                    ref={initialRef}
-                                    placeholder="Task name"
-                                    _focus={{
-                                        boxShadow: 'none',
-                                        borderColor: 'black',
-                                    }}
-                                />
-                            </FormControl>
-
-                            <FormControl>
-                                <FormLabel>End</FormLabel>
-
-                                <Input
-                                    borderRadius={12}
-                                    ref={initialRef}
-                                    placeholder="Task name"
-                                    _focus={{
-                                        boxShadow: 'none',
-                                        borderColor: 'black',
-                                    }}
-                                />
-                            </FormControl>
-                        </HStack>
                     </VStack>
                 </ModalBody>
 
