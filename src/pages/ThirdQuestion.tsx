@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import {
     Box,
     Button,
@@ -26,11 +26,11 @@ import { withDisclosure } from '../hocs';
 import { withDisclosureType } from '../hocs/withDisclosure';
 
 // eslint-disable-next-line react-refresh/only-export-components
-const ThirdQuestionPage: React.FC = ({
+function ThirdQuestionPage({
     isOpen: isCreateTaskModalOpen,
     open: openCreateTaskModal,
     close: closeCreateTaskModal,
-}: withDisclosureType): ReactElement => {
+}: withDisclosureType): ReactElement {
     const tasks = useAppSelector((state) => state.task.tasks);
 
     return (
@@ -142,7 +142,7 @@ const ThirdQuestionPage: React.FC = ({
             />
         </HStack>
     );
-};
+}
 
 // eslint-disable-next-line react-refresh/only-export-components
 export default withDisclosure(ThirdQuestionPage);
