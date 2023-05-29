@@ -37,7 +37,7 @@ yarn run dev
 Open http://127.0.0.1:5173/ with your browser to see the result.
 
 ### App Screenshot
-_This app is not responsive yet, the screenshot is taken from 1024 x 640 screen resoliution_
+_This app is not responsive yet, the screenshot is taken from 1024 x 640 screen resolution_
 
 #### 1st Question
 <img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/1891e30a-e458-4a41-be0b-240d8839e653">
