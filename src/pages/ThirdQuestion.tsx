@@ -6,7 +6,6 @@ import {
     IconButton,
     Text,
     VStack,
-    useDisclosure,
 } from '@chakra-ui/react';
 import { UilStopwatch, UilPlus } from '@iconscout/react-unicons';
 import moment from 'moment';
@@ -22,9 +21,17 @@ import {
     TopBar,
 } from '../components';
 import { COLORS } from '../constants';
+import { useAppSelector } from '../store/store';
+import { withDisclosure } from '../hocs';
+import { withDisclosureType } from '../hocs/withDisclosure';
 
-const ThirdQuestionPage: React.FC = (): ReactElement => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+// eslint-disable-next-line react-refresh/only-export-components
+const ThirdQuestionPage: React.FC = ({
+    isOpen: isCreateTaskModalOpen,
+    open: openCreateTaskModal,
+    close: closeCreateTaskModal,
+}: withDisclosureType): ReactElement => {
+    const tasks = useAppSelector((state) => state.task.tasks);
 
     return (
         <HStack
@@ -46,7 +53,10 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                         <Box pb="22px">
                             <HeadingText>You've got</HeadingText>
                             <HeadingText>
-                                {`${8} task${8 > 1 ? 's' : ''} today`} 🗒️
+                                {`${tasks.length} task${
+                                    tasks.length > 1 ? 's' : ''
+                                } today`}{' '}
+                                🗒️
                             </HeadingText>
                         </Box>
 
@@ -110,7 +120,7 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                                 borderRadius={12}
                                 fontSize={14}
                                 p={8}
-                                onClick={onOpen}
+                                onClick={openCreateTaskModal}
                                 _hover={{
                                     bgColor: COLORS.gray,
                                 }}
@@ -126,9 +136,13 @@ const ThirdQuestionPage: React.FC = (): ReactElement => {
                 </HStack>
             </VStack>
 
-            <CreateTaskModal isOpen={isOpen} onClose={onClose} />
+            <CreateTaskModal
+                isOpen={isCreateTaskModalOpen}
+                onClose={closeCreateTaskModal}
+            />
         </HStack>
     );
 };
 
-export default ThirdQuestionPage;
+// eslint-disable-next-line react-refresh/only-export-components
+export default withDisclosure(ThirdQuestionPage);
