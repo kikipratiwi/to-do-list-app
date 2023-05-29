@@ -40,25 +40,22 @@ Open http://127.0.0.1:5173/ with your browser to see the result.
 _This app is not responsive yet, the screenshot is taken from 1024 x 640 screen resoliution_
 
 #### 1st Question
-
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/b85822e9-7e36-4d41-9915-b0d1624c7deb">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/1891e30a-e458-4a41-be0b-240d8839e653">
 
 #### 2nd Question
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/2332d84e-5fae-4b3a-8081-d4cbec0577d6">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/71f7150a-2cc1-4f1a-b2d1-d48b956463b1">
+
 
 #### 3rd Question
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/850bf6f6-8de0-4e68-8708-0c37f159de21">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/164c3118-075a-4328-ae25-dd400f5f6ece">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/c88e2e8d-ad8d-46ee-ad4e-1ed59ad594c3">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/579575ae-86f7-4b31-ba21-7a7d7e225142">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/eaae764b-a390-4ef3-806d-bb67de9342e6">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/0d94de00-4848-41d8-89f2-1bc1fa0a5e9b">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/d5efc0bb-289b-4782-907d-9bf9841f14ec">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/fc7749c8-1d49-4af9-9774-274ae6201dd4">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/25c7939b-546a-49e8-8033-90dd666648db">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/a4e409a7-f160-47ef-a979-d2e80f20aefe">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/cfcf8ee3-b23b-47a6-ba62-2ca2cc231a05">
-<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/03c75bee-e9a0-4ddc-8b68-6a9f88d3b310">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/d8908597-afc2-4d9b-a6a8-45cd369d65f7">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/e9094f05-5492-4510-94e3-331eba42aca5">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/01ed7272-3ca2-4008-be44-90c8ed1a35e2">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/8f1d2cb1-5f47-42c3-ba2a-67f7d7e76163">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/d2da5aec-be0f-4fb0-8c01-295224da4bca">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/614d82d4-ad4e-41d9-be13-a44ec23617f1">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/81626dcb-fd3c-40d4-8aa3-d6c6a935ed9c">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/f3147edc-c58e-491f-aa7f-0176c2fb5bad">
+<img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/62e05a6c-135a-4b57-8669-190f20171660">
 
 
 
