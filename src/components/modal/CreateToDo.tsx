@@ -1,9 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import {
     Button,
     FormControl,
     FormLabel,
-    HStack,
     Input,
     Modal,
     ModalBody,
@@ -13,6 +12,8 @@ import {
     ModalOverlay,
     VStack,
 } from '@chakra-ui/react';
+import { useAppDispatch } from '../../store/store';
+import { addToDo } from '../../store/slices/todo.slice';
 
 type CreateToDoModalProps = {
     isOpen: boolean;
@@ -23,7 +24,23 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
     isOpen,
     onClose,
 }: CreateToDoModalProps): ReactElement => {
-    const initialRef = React.useRef(null);
+    const [todo, setToDo] = useState<string>();
+    const [dateTime, setDateTime] = useState<string>();
+
+    const dispatch = useAppDispatch();
+
+    const setInputValue = (
+        value: string,
+        setState: React.Dispatch<React.SetStateAction<any>>,
+    ) => {
+        setState(value);
+    };
+
+    const saveToTemporaryStorage = () => {
+        if (!todo) return;
+        dispatch(addToDo({ todo: todo, date: dateTime }));
+        onClose();
+    };
 
     return (
         <Modal
@@ -39,12 +56,16 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 
                 <ModalBody pb={6}>
                     <VStack alignItems="start">
-                        <FormControl>
+                        <FormControl isRequired>
                             <FormLabel>To Do</FormLabel>
                             <Input
+                                required
                                 borderRadius={12}
                                 mr={2}
                                 placeholder="Your action item"
+                                onChange={(e) =>
+                                    setInputValue(e.target.value, setToDo)
+                                }
                                 _focus={{
                                     boxShadow: 'none',
                                     borderColor: 'black',
@@ -57,8 +78,11 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 
                             <Input
                                 borderRadius={12}
-                                ref={initialRef}
                                 placeholder="Task name"
+                                type="datetime-local"
+                                onChange={(e) =>
+                                    setInputValue(e.target.value, setDateTime)
+                                }
                                 _focus={{
                                     boxShadow: 'none',
                                     borderColor: 'black',
@@ -77,6 +101,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
                         bg="black"
                         _hover={{ color: 'black', bg: 'gray.300' }}
                         borderRadius={12}
+                        onClick={saveToTemporaryStorage}
                     >
                         Add
                     </Button>

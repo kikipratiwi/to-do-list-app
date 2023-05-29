@@ -1,36 +1,12 @@
 import React, { ReactElement } from 'react';
-import { Button, ButtonGroup, HStack, VStack } from '@chakra-ui/react';
+import { Button, ButtonGroup, HStack, Text, VStack } from '@chakra-ui/react';
 
 import { COLORS } from '../../constants';
 import { HeadingText, TaskCard } from '..';
-import { TaskCardProps } from './TaskCard';
+import { useAppSelector } from '../../store/store';
 
 const MyTasks: React.FC = (): ReactElement => {
-    const dummyData: TaskCardProps[] = [
-        {
-            title: 'Make Hero Section',
-            description:
-                'Make a hero section on landing page and I love to doing it',
-            progress: 90,
-            totalTask: 5,
-            totalCompletedTask: 4,
-        },
-        {
-            title: 'Make Contact Page',
-            description: 'Make a contact page on portfolio website',
-            progress: 67,
-            totalTask: 5,
-            totalCompletedTask: 4,
-        },
-        {
-            title: 'Make Hero Section',
-            description:
-                'Make a hero section on landing page and I love to doing it',
-            progress: 100,
-            totalTask: 5,
-            totalCompletedTask: 5,
-        },
-    ];
+    const tasks = useAppSelector((state) => state.task.tasks);
 
     return (
         <VStack alignItems="start" spacing="22px" w="full">
@@ -38,10 +14,9 @@ const MyTasks: React.FC = (): ReactElement => {
 
             <HStack>
                 <ButtonGroup variant="link" spacing="6">
-                    <Button color={COLORS.yellow}>Missed</Button>
-                    <Button color={COLORS.gray}>Today</Button>
-                    <Button color={COLORS.gray}>Upcoming</Button>
-                    <Button color={COLORS.gray}>Later</Button>
+                    <Button color={COLORS.gray}>Completed</Button>
+                    <Button color={COLORS.yellow}>On-going</Button>
+                    <Button color={COLORS.gray}>Archived</Button>
                 </ButtonGroup>
             </HStack>
 
@@ -55,18 +30,32 @@ const MyTasks: React.FC = (): ReactElement => {
                 maxHeight="358px"
                 overflowY="auto"
             >
-                {dummyData?.length > 0 &&
-                    dummyData.map(
-                        ({ ...task }: TaskCardProps, index: number) => {
+                {tasks?.length > 0 ? (
+                    tasks.map(
+                        (
+                            { totalCompletedTask, totalTask, ...rest },
+                            index: number,
+                        ) => {
+                            const progress =
+                                totalCompletedTask ??
+                                (totalCompletedTask / totalTask) * 100;
                             return (
                                 <TaskCard
                                     key={'task' + index}
                                     isOdd={(index + 1) % 2 === 0}
-                                    {...task}
+                                    progress={progress}
+                                    totalCompletedTask={totalCompletedTask}
+                                    totalTask={totalTask}
+                                    {...rest}
                                 />
                             );
                         },
-                    )}
+                    )
+                ) : (
+                    <Text fontSize="sm" fontStyle="italic" color={COLORS.gray}>
+                        Your dont't have any tasks
+                    </Text>
+                )}
             </VStack>
         </VStack>
     );

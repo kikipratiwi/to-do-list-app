@@ -16,23 +16,21 @@ import {
 import { UilEllipsisV, UilFileCheckAlt } from '@iconscout/react-unicons';
 import { COLORS } from '../../constants';
 import { ConfirmationModal, DetailTaskModal, TaskProgress } from '..';
+import { Task } from '../../store/slices/task.slice';
 
-export type TaskCardProps = {
-    description: string;
-    progress: number;
-    title: string;
+export interface TaskCardProps extends Task {
     isOdd?: boolean;
-    totalCompletedTask?: number;
-    totalTask?: number;
-};
+    progress: number;
+}
 
 const TaskCard: React.FC<TaskCardProps> = ({
+    id,
     description,
     isOdd,
-    progress,
     title,
     totalCompletedTask,
     totalTask,
+    progress,
 }: TaskCardProps): ReactElement => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const {
@@ -44,13 +42,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
     return (
         <>
             <Card
-                onClick={onOpenDetailTask}
-                key={1}
+                key={id}
                 bgColor={isOdd ? 'black' : 'white'}
                 borderRadius={12}
                 boxShadow="rgba(17, 17, 26, 0.1) 0px 4px 12px, rgba(17, 17, 26, 0.05) 0px 4px 10px;"
                 color={isOdd ? 'white' : 'black'}
-                cursor="pointer"
                 p={4}
                 size="sm"
                 variant="elevated"
@@ -90,7 +86,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
                     </HStack>
                 </CardHeader>
 
-                <CardBody pt={0}>
+                <CardBody pt={0} onClick={onOpenDetailTask} cursor="pointer">
                     <VStack spacing={4} alignItems="start">
                         <Text color={COLORS.gray} fontWeight={500} w="90%">
                             {description}

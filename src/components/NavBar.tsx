@@ -47,9 +47,13 @@ const NavBar: React.FC = (): ReactElement => {
     return (
         <VStack flexGrow={1} pt="90px">
             {navigations.map(
-                ({ active, label, icon }: NavigationType): ReactNode => {
+                (
+                    { active, label, icon }: NavigationType,
+                    index: number,
+                ): ReactNode => {
                     return (
                         <Button
+                            key={'navbar' + index}
                             bgColor={active ? 'black' : 'white'}
                             borderBottomLeftRadius={0}
                             borderRightRadius={10}

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import {
     Button,
     Divider,
@@ -11,10 +11,15 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
+    Text,
     VStack,
     useDisclosure,
 } from '@chakra-ui/react';
 import { CreateToDoModal, ToDoCheckItem } from '..';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { ToDo, clearToDo, removeToDo } from '../../store/slices/todo.slice';
+import { COLORS } from '../../constants';
+import { addTask } from '../../store/slices/task.slice';
 
 type CreateTaskModalProps = {
     isOpen: boolean;
@@ -25,12 +30,47 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     isOpen,
     onClose,
 }: CreateTaskModalProps): ReactElement => {
-    const initialRef = React.useRef(null);
+    const todos = useAppSelector((state) => state.todo.todos);
+    const dispatch = useAppDispatch();
+
+    const [title, setTitle] = useState<string>();
+    const [description, setDescription] = useState<string>();
+
     const {
-        isOpen: isCreateTodoOpen,
-        onOpen: onOpenCreateTodo,
-        onClose: onCloseCreateTodo,
+        isOpen: isCreateToDoOpen,
+        onOpen: onOpenCreateToDo,
+        onClose: onCloseCreateToDo,
     } = useDisclosure();
+
+    const setInputValue = (
+        value: string,
+        setState: React.Dispatch<React.SetStateAction<any>>,
+    ) => {
+        setState(value);
+    };
+
+    const removeToDoFromTemporaryStorage = (todo: ToDo) => {
+        dispatch(removeToDo(todo));
+    };
+
+    const saveTaskToStorage = () => {
+        if (!title) return;
+
+        dispatch(
+            addTask({
+                title: title,
+                description: description,
+                totalCompletedTask: 0,
+                totalTask: todos.length,
+            }),
+        );
+        closeAndClear();
+    };
+
+    const closeAndClear = () => {
+        dispatch(clearToDo());
+        onClose();
+    };
 
     return (
         <>
@@ -47,13 +87,16 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
                     <ModalBody pb={6}>
                         <VStack alignItems="start">
-                            <FormControl>
+                            <FormControl isRequired>
                                 <FormLabel>Task</FormLabel>
 
                                 <Input
+                                    required
                                     borderRadius={12}
-                                    ref={initialRef}
                                     placeholder="Task name"
+                                    onChange={(e) =>
+                                        setInputValue(e.target.value, setTitle)
+                                    }
                                     _focus={{
                                         boxShadow: 'none',
                                         borderColor: 'black',
@@ -66,8 +109,13 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
                                 <Input
                                     borderRadius={12}
-                                    ref={initialRef}
                                     placeholder="Description"
+                                    onChange={(e) =>
+                                        setInputValue(
+                                            e.target.value,
+                                            setDescription,
+                                        )
+                                    }
                                     _focus={{
                                         boxShadow: 'none',
                                         borderColor: 'black',
@@ -80,7 +128,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                                 size="sm"
                                 color="black"
                                 pt={1}
-                                onClick={onOpenCreateTodo}
+                                onClick={onOpenCreateToDo}
                             >
                                 + Add to do
                             </Button>
@@ -90,21 +138,53 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                             <FormControl pt={2}>
                                 <FormLabel>Your To do(s)</FormLabel>
 
-                                <VStack alignItems="start" w="full">
-                                    <ToDoCheckItem
-                                        label="Added to do item willl be appear here"
-                                        date={new Date()}
-                                    />
-                                </VStack>
+                                {todos.length > 0 ? (
+                                    <VStack alignItems="start" w="full">
+                                        {todos.map((todo) => {
+                                            return (
+                                                <ToDoCheckItem
+                                                    key={todo.id}
+                                                    label={todo.todo}
+                                                    isChecked={true}
+                                                    onChange={() =>
+                                                        removeToDoFromTemporaryStorage(
+                                                            todo,
+                                                        )
+                                                    }
+                                                    date={
+                                                        todo.date
+                                                            ? new Date(
+                                                                  todo.date,
+                                                              )
+                                                            : 'Unspecified time'
+                                                    }
+                                                />
+                                            );
+                                        })}
+                                    </VStack>
+                                ) : (
+                                    <Text
+                                        fontSize="sm"
+                                        fontStyle="italic"
+                                        color={COLORS.gray}
+                                    >
+                                        Your todo is empty
+                                    </Text>
+                                )}
                             </FormControl>
                         </VStack>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button borderRadius={12} onClick={onClose} mr={3}>
+                        <Button
+                            onClick={closeAndClear}
+                            borderRadius={12}
+                            mr={3}
+                        >
                             Cancel
                         </Button>
                         <Button
+                            onClick={saveTaskToStorage}
                             color="white"
                             bg="black"
                             _hover={{ color: 'black', bg: 'gray.300' }}
@@ -117,8 +197,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
             </Modal>
 
             <CreateToDoModal
-                isOpen={isCreateTodoOpen}
-                onClose={onCloseCreateTodo}
+                isOpen={isCreateToDoOpen}
+                onClose={onCloseCreateToDo}
             />
         </>
     );
