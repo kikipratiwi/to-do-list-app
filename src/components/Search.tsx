@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import {
     Box,
     Button,
@@ -20,14 +20,37 @@ import { COLORS } from '../constants';
 
 import { UilSearch } from '@iconscout/react-unicons';
 import { DetailTaskModal } from '.';
+import { useAppSelector } from '../store/store';
+import { Task } from '../store/slices/task.slice';
 
 const Search: React.FC = (): ReactElement => {
+    const tasks = useAppSelector((state) => state.task.tasks);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const {
         isOpen: isDetailTaskOpen,
         onOpen: onOpenDetailTask,
         onClose: onCloseDetailTask,
     } = useDisclosure();
+
+    const [searchText, setSearchText] = useState<string>('');
+    const [selectedTask, setSelectedTask] = useState<Task>({
+        id: 0,
+        title: '',
+        description: '',
+        todos: [],
+        totalCompletedTask: 0,
+        totalTask: 0,
+    });
+
+    const regexp = new RegExp(searchText, 'i');
+
+    const filteredTask = searchText
+        ? tasks.filter((task) => task.title.match(regexp))
+        : [];
+
+    useEffect(() => {
+        onOpenDetailTask();
+    }, [selectedTask]);
 
     return (
         <>
@@ -84,78 +107,67 @@ const Search: React.FC = (): ReactElement => {
                                 size="lg"
                                 type="text"
                                 variant="filled"
+                                value={searchText}
+                                _placeholder={{ color: COLORS.gray }}
                                 _hover={{}}
                                 _focus={{
                                     border: 'none',
                                     boxShadow: 'none',
                                 }}
-                                _placeholder={{ color: COLORS.gray }}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>,
+                                ) => setSearchText(e.target.value)}
                             />
                         </InputGroup>
 
-                        <VStack w="full" spacing={4} pb={4}>
-                            <Divider />
+                        {filteredTask.length > 0 && (
+                            <VStack w="full" spacing={4} pb={4}>
+                                <Divider />
 
-                            <Card
-                                onClick={onOpenDetailTask}
-                                cursor="pointer"
-                                variant="elevated"
-                                bg={COLORS.semigray}
-                                _hover={{ bg: COLORS.yellow, color: 'black' }}
-                                p={2}
-                                w="full"
-                                size="sm"
-                            >
-                                <CardBody p={0}>
-                                    <VStack
-                                        alignItems="start"
-                                        spacing={0}
-                                        pl={2}
-                                    >
-                                        <Text fontSize="sm" fontWeight={500}>
-                                            Task
-                                        </Text>
-
-                                        <Text
-                                            fontWeight="semibold"
-                                            fontSize="xl"
+                                {filteredTask.map((task, index) => {
+                                    return (
+                                        <Card
+                                            key={'task-result' + index}
+                                            onClick={() =>
+                                                setSelectedTask(task)
+                                            }
+                                            cursor="pointer"
+                                            variant="elevated"
+                                            bg={COLORS.semigray}
+                                            _hover={{
+                                                bg: COLORS.yellow,
+                                                color: 'black',
+                                            }}
+                                            p={2}
+                                            w="full"
+                                            size="sm"
                                         >
-                                            Result #1
-                                        </Text>
-                                    </VStack>
-                                </CardBody>
-                            </Card>
+                                            <CardBody p={0}>
+                                                <VStack
+                                                    alignItems="start"
+                                                    spacing={0}
+                                                    pl={2}
+                                                >
+                                                    <Text
+                                                        fontSize="sm"
+                                                        fontWeight={500}
+                                                    >
+                                                        #task
+                                                    </Text>
 
-                            <Card
-                                onClick={onOpenDetailTask}
-                                cursor="pointer"
-                                variant="elevated"
-                                bg={COLORS.semigray}
-                                _hover={{ bg: COLORS.yellow, color: 'black' }}
-                                p={2}
-                                w="full"
-                                size="sm"
-                            >
-                                <CardBody p={0}>
-                                    <VStack
-                                        alignItems="start"
-                                        spacing={0}
-                                        pl={2}
-                                    >
-                                        <Text fontSize="sm" fontWeight={500}>
-                                            To Do
-                                        </Text>
-
-                                        <Text
-                                            fontWeight="semibold"
-                                            fontSize="xl"
-                                        >
-                                            Result #2
-                                        </Text>
-                                    </VStack>
-                                </CardBody>
-                            </Card>
-                        </VStack>
+                                                    <Text
+                                                        fontWeight="semibold"
+                                                        fontSize="xl"
+                                                    >
+                                                        {task.title}
+                                                    </Text>
+                                                </VStack>
+                                            </CardBody>
+                                        </Card>
+                                    );
+                                })}
+                            </VStack>
+                        )}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -163,6 +175,7 @@ const Search: React.FC = (): ReactElement => {
             <DetailTaskModal
                 isOpen={isDetailTaskOpen}
                 onClose={onCloseDetailTask}
+                {...selectedTask}
             />
         </>
     );

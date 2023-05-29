@@ -21,7 +21,6 @@ import { useAppDispatch } from '../../store/store';
 interface DetailTaskProps extends Task {
     isOpen: boolean;
     onClose: () => void;
-    progress: number;
 }
 
 const CreateTaskModal: React.FC<DetailTaskProps> = ({
@@ -36,9 +35,12 @@ const CreateTaskModal: React.FC<DetailTaskProps> = ({
         totalCompletedTask,
         totalTask,
         todos = [],
-        progress,
     } = rest;
     const dispatch = useAppDispatch();
+
+    const progress = totalCompletedTask
+        ? (totalCompletedTask / totalTask) * 100
+        : 0;
 
     const updateToDoStatus = (todoId: number) => {
         dispatch(updateTodo({ taskId: id, todoId: todoId }));

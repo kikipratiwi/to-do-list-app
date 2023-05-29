@@ -116,7 +116,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
             <DetailTaskModal
                 isOpen={isDetailTaskOpen}
                 onClose={onCloseDetailTask}
-                progress={progress}
                 {...rest}
             />
         </>
