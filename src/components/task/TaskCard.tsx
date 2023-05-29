@@ -16,7 +16,8 @@ import {
 import { UilEllipsisV, UilFileCheckAlt } from '@iconscout/react-unicons';
 import { COLORS } from '../../constants';
 import { ConfirmationModal, DetailTaskModal, TaskProgress } from '..';
-import { Task } from '../../store/slices/task.slice';
+import { Task, removeTask } from '../../store/slices/task.slice';
+import { useAppDispatch } from '../../store/store';
 
 export interface TaskCardProps extends Task {
     isOdd?: boolean;
@@ -28,6 +29,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
     progress,
     ...rest
 }: TaskCardProps): ReactElement => {
+    const dispatch = useAppDispatch();
     const { id, title, description, totalCompletedTask, totalTask } = rest;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const {
@@ -35,6 +37,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
         onOpen: onOpenDetailTask,
         onClose: onCloseDetailTask,
     } = useDisclosure();
+
+    const removeTaskFromStorage = () => {
+        dispatch(removeTask({ id: id }));
+    };
 
     return (
         <>
@@ -112,7 +118,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
                 </CardBody>
             </Card>
 
-            <ConfirmationModal isOpen={isOpen} onClose={onClose} />
+            <ConfirmationModal
+                isOpen={isOpen}
+                onClose={onClose}
+                onAction={removeTaskFromStorage}
+            />
 
             <DetailTaskModal
                 isOpen={isDetailTaskOpen}

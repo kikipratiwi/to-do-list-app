@@ -12,11 +12,13 @@ import {
 type ConfirmationModalProps = {
     isOpen: boolean;
     onClose: () => void;
+    onAction: () => void;
 };
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     isOpen,
     onClose,
+    onAction,
 }: ConfirmationModalProps): ReactElement => {
     return (
         <Modal
@@ -37,6 +39,10 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
                         bg="black"
                         _hover={{ color: 'black', bg: 'gray.300' }}
                         borderRadius={12}
+                        onClick={() => {
+                            onAction();
+                            onClose();
+                        }}
                     >
                         Yes
                     </Button>

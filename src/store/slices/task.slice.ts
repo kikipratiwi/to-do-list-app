@@ -45,7 +45,7 @@ export const TaskSlice = createSlice({
 
             state.tasks = newTasks;
         },
-        removeTask: (state, action: PayloadAction<Task>) => {
+        removeTask: (state, action: PayloadAction<{ id: number }>) => {
             const newTask = state.tasks.filter(
                 (task) => task.id !== action.payload.id,
             );
