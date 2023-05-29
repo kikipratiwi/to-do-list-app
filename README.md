@@ -9,7 +9,7 @@ Open [To-do List App Live](https://bucolic-trifle-71a727.netlify.app/) to view i
 - [x] Using Redux State Management.
 - [x] Clean Code & Clean UI (Can reference to dribbble) -> **I use [Task Manager Design](https://dribbble.com/shots/14532608-Task-Manager-App-Design/attachments/6220117?mode=media) from Dribbble as my reference**.
 - [x] Using React Hook is a plus.
-- [ ] Must be using Higher Order Function.
+- [x] Must be using Higher Order Function. -> **I only apply one of HOC example implementation**
 - [ ] Using context is a plus.
 - [ ] Permitted for using lodash.
 
