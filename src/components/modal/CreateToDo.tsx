@@ -41,6 +41,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
         dispatch(
             addToDo({ id: 0, todo: todo, date: dateTime, isChecked: false }),
         );
+        setDateTime(null);
         onClose();
     };
 
