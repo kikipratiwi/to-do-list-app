@@ -18,6 +18,24 @@ Open [To-do List App Live](https://bucolic-trifle-71a727.netlify.app/) to view i
 - [x] Can create and delete the task.
 - [x] Can search tasks.
 
+## About Project
+
+### Project Dependencies
+- **chakra-ui** as component library
+- **iconscout/react-unicon** for icon package
+- **redux** as react state management library
+
+
+### Getting Started
+
+First, run the development server:
+
+```bash
+yarn run dev
+```
+
+Open http://127.0.0.1:5173/ with your browser to see the result.
+
 ### App Screenshot
 _This app is not responsive yet, the screenshot is taken from 1024 x 640 screen resoliution_
 
@@ -42,23 +60,5 @@ _This app is not responsive yet, the screenshot is taken from 1024 x 640 screen 
 <img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/cfcf8ee3-b23b-47a6-ba62-2ca2cc231a05">
 <img width="1440" alt="image" src="https://github.com/kikipratiwi/to-do-list-app/assets/20922216/03c75bee-e9a0-4ddc-8b68-6a9f88d3b310">
 
-
-## About Project
-
-### Project Dependencies
-- **chakra-ui** as component library
-- **iconscout/react-unicon** for icon package
-- **redux** as react state management library
-
-
-### Getting Started
-
-First, run the development server:
-
-```bash
-yarn run dev
-```
-
-Open http://127.0.0.1:5173/ with your browser to see the result.
 
 
