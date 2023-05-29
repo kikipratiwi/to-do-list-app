@@ -2,7 +2,7 @@
 This project is simple To-do list app for DoCheck Frontend Developer Assessment Skill Test. This project bootstrapped with [`Vite`]([https://vitejs.dev/](https://vitejs.dev/)).
 
 ### Live Demo
-Open [To-do List App Live](https://main--stirring-dragon-d1666f.netlify.app/) to view it live.
+Open [To-do List App Live](https://bucolic-trifle-71a727.netlify.app/) to view it live.
 
 ### Checklist Requirement for 3rd Question 
 - [x] Using Typescript
@@ -56,7 +56,7 @@ _This app is not responsive yet, the screenshot is taken from 1024 x 640 screen 
 First, run the development server:
 
 ```bash
-yarn && yarn run dev
+yarn run dev
 ```
 
 Open http://127.0.0.1:5173/ with your browser to see the result.
