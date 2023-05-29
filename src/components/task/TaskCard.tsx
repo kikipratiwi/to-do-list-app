@@ -24,14 +24,11 @@ export interface TaskCardProps extends Task {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({
-    id,
-    description,
     isOdd,
-    title,
-    totalCompletedTask,
-    totalTask,
     progress,
+    ...rest
 }: TaskCardProps): ReactElement => {
+    const { id, title, description, totalCompletedTask, totalTask } = rest;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const {
         isOpen: isDetailTaskOpen,
@@ -56,22 +53,32 @@ const TaskCard: React.FC<TaskCardProps> = ({
                     <HStack
                         w="full"
                         justifyContent="space-between"
-                        alignItems="end"
+                        alignItems="start"
                     >
-                        <Text fontWeight="bold">{title}</Text>
+                        <VStack
+                            alignItems="start"
+                            flexGrow={1}
+                            onClick={onOpenDetailTask}
+                            cursor="pointer"
+                        >
+                            <Text fontWeight="bold">{title}</Text>
+                            <Text color={COLORS.gray} fontWeight={500}>
+                                {description}
+                            </Text>
+                        </VStack>
 
                         <Menu>
                             <MenuButton
                                 as={IconButton}
                                 aria-label="Options"
+                                rounded="full"
+                                variant="solid"
                                 icon={
                                     <UilEllipsisV
                                         color={isOdd ? 'white' : 'black'}
                                         fontSize={12}
                                     />
                                 }
-                                rounded="full"
-                                variant="solid"
                                 bg={isOdd ? 'black' : 'white'}
                                 {...(isOdd && {
                                     _hover: { bgColor: 'gray' },
@@ -86,12 +93,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
                     </HStack>
                 </CardHeader>
 
-                <CardBody pt={0} onClick={onOpenDetailTask} cursor="pointer">
-                    <VStack spacing={4} alignItems="start">
-                        <Text color={COLORS.gray} fontWeight={500} w="90%">
-                            {description}
-                        </Text>
-
+                <CardBody onClick={onOpenDetailTask} cursor="pointer">
+                    <VStack spacing={3} alignItems="start">
                         <HStack>
                             <UilFileCheckAlt color={isOdd ? 'white' : 'gray'} />
                             <Text
@@ -113,6 +116,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
             <DetailTaskModal
                 isOpen={isDetailTaskOpen}
                 onClose={onCloseDetailTask}
+                progress={progress}
+                {...rest}
             />
         </>
     );

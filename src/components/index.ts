@@ -15,4 +15,4 @@ export { default as TaskCard } from './task/TaskCard';
 export { default as TaskProgress } from './task/TaskProgress';
 export { default as MyToDos } from './todo/MyToDos';
 export { default as ToDoCard } from './todo/ToDoCard';
-export { default as ToDoCheckItem } from './todo/ToDoCheckItem';
+export { default as ToDoList } from './todo/ToDoList';

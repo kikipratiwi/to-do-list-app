@@ -11,14 +11,12 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Text,
     VStack,
     useDisclosure,
 } from '@chakra-ui/react';
-import { CreateToDoModal, ToDoCheckItem } from '..';
+import { CreateToDoModal, ToDoList } from '..';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { ToDo, clearToDo, removeToDo } from '../../store/slices/todo.slice';
-import { COLORS } from '../../constants';
+import { clearToDo, removeToDo } from '../../store/slices/todo.slice';
 import { addTask } from '../../store/slices/task.slice';
 
 type CreateTaskModalProps = {
@@ -49,8 +47,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         setState(value);
     };
 
-    const removeToDoFromTemporaryStorage = (todo: ToDo) => {
-        dispatch(removeToDo(todo));
+    const removeToDoFromTemporaryStorage = (id: number) => {
+        dispatch(removeToDo({ id: id }));
     };
 
     const saveTaskToStorage = () => {
@@ -58,8 +56,10 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
         dispatch(
             addTask({
+                id: 0,
                 title: title,
                 description: description,
+                todos: todos,
                 totalCompletedTask: 0,
                 totalTask: todos.length,
             }),
@@ -138,39 +138,12 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                             <FormControl pt={2}>
                                 <FormLabel>Your To do(s)</FormLabel>
 
-                                {todos.length > 0 ? (
-                                    <VStack alignItems="start" w="full">
-                                        {todos.map((todo) => {
-                                            return (
-                                                <ToDoCheckItem
-                                                    key={todo.id}
-                                                    label={todo.todo}
-                                                    isChecked={true}
-                                                    onChange={() =>
-                                                        removeToDoFromTemporaryStorage(
-                                                            todo,
-                                                        )
-                                                    }
-                                                    date={
-                                                        todo.date
-                                                            ? new Date(
-                                                                  todo.date,
-                                                              )
-                                                            : 'Unspecified time'
-                                                    }
-                                                />
-                                            );
-                                        })}
-                                    </VStack>
-                                ) : (
-                                    <Text
-                                        fontSize="sm"
-                                        fontStyle="italic"
-                                        color={COLORS.gray}
-                                    >
-                                        Your todo is empty
-                                    </Text>
-                                )}
+                                <ToDoList
+                                    todos={todos}
+                                    onChange={(id) =>
+                                        removeToDoFromTemporaryStorage(id)
+                                    }
+                                />
                             </FormControl>
                         </VStack>
                     </ModalBody>

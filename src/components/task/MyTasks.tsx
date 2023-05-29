@@ -36,9 +36,9 @@ const MyTasks: React.FC = (): ReactElement => {
                             { totalCompletedTask, totalTask, ...rest },
                             index: number,
                         ) => {
-                            const progress =
-                                totalCompletedTask ??
-                                (totalCompletedTask / totalTask) * 100;
+                            const progress = totalCompletedTask
+                                ? (totalCompletedTask / totalTask) * 100
+                                : 0;
                             return (
                                 <TaskCard
                                     key={'task' + index}

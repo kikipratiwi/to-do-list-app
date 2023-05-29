@@ -13,20 +13,40 @@ import {
 } from '@chakra-ui/react';
 import { UilFileCheckAlt } from '@iconscout/react-unicons';
 
-import { TaskProgress, ToDoCheckItem } from '..';
+import { TaskProgress, ToDoList } from '..';
 import { COLORS } from '../../constants';
+import { Task, updateTodo } from '../../store/slices/task.slice';
+import { useAppDispatch } from '../../store/store';
 
-type CreateTaskModalProps = {
+interface DetailTaskProps extends Task {
     isOpen: boolean;
     onClose: () => void;
-};
+    progress: number;
+}
 
-const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
+const CreateTaskModal: React.FC<DetailTaskProps> = ({
     isOpen,
     onClose,
-}: CreateTaskModalProps): ReactElement => {
+    ...rest
+}: DetailTaskProps): ReactElement => {
+    const {
+        id,
+        title,
+        description,
+        totalCompletedTask,
+        totalTask,
+        todos = [],
+        progress,
+    } = rest;
+    const dispatch = useAppDispatch();
+
+    const updateToDoStatus = (todoId: number) => {
+        dispatch(updateTodo({ taskId: id, todoId: todoId }));
+    };
+
     return (
         <Modal
+            id={'detail-task' + id}
             closeOnOverlayClick={false}
             isOpen={isOpen}
             onClose={onClose}
@@ -41,14 +61,14 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                 <ModalBody pb={6}>
                     <VStack alignItems="start" spacing={6}>
                         <VStack alignItems="start">
-                            <Text fontWeight="bold">Task Name</Text>
+                            <Text fontWeight="bold">{title}</Text>
 
                             <Text color={COLORS.gray} fontWeight={500}>
-                                description task
+                                {description}
                             </Text>
                         </VStack>
 
-                        <TaskProgress progress={80} />
+                        <TaskProgress progress={progress} />
 
                         <VStack alignItems="start" w="full">
                             <HStack>
@@ -58,24 +78,14 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                                     fontWeight={500}
                                     fontSize="sm"
                                 >
-                                    3 task / 5 task
+                                    {totalCompletedTask} task / {totalTask} task
                                 </Text>
                             </HStack>
 
-                            <VStack alignItems="start" w="full">
-                                <ToDoCheckItem
-                                    label="Added to do item willl be appear here"
-                                    date={new Date()}
-                                />
-                                <ToDoCheckItem
-                                    label="Added to do item willl be appear here"
-                                    date={new Date()}
-                                />
-                                <ToDoCheckItem
-                                    label="Added to do item willl be appear here"
-                                    date={new Date()}
-                                />
-                            </VStack>
+                            <ToDoList
+                                todos={todos}
+                                onChange={(id) => updateToDoStatus(id)}
+                            />
                         </VStack>
                     </VStack>
                 </ModalBody>

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface ToDo {
-    id?: number;
+    id: number;
     todo: string;
     date?: string;
     isChecked?: boolean;
@@ -21,11 +21,11 @@ export const ToDoSlice = createSlice({
     reducers: {
         addToDo: (state, action: PayloadAction<ToDo>) => {
             state.todos.push({
-                id: state.todos.length,
                 ...action.payload,
+                id: state.todos.length,
             });
         },
-        removeToDo: (state, action: PayloadAction<ToDo>) => {
+        removeToDo: (state, action: PayloadAction<{ id: number }>) => {
             const newToDo = state.todos.filter(
                 (todo) => todo.id !== action.payload.id,
             );
