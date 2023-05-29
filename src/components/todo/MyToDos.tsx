@@ -6,22 +6,22 @@ import ToDoCard, { ToDoCardProps } from './ToDoCard';
 const MyToDos: React.FC = (): ReactElement => {
     const dummyData: ToDoCardProps[] = [
         {
-            taskName: 'Make Hero Section',
+            id: 1,
+            taskTitle: 'Make Hero Section',
             todo: 'Make a hero section on landing page and I love to doing it',
-            time: '9.00 AM',
-            isComplete: false,
+            isChecked: false,
         },
         {
-            taskName: 'Make Hero Section',
-            todo: 'Make a hero section on landing page and I love to doing it',
-            time: '10.00 AM',
-            isComplete: false,
+            id: 2,
+            taskTitle: 'Make Contact Page',
+            todo: 'Make contact page in personal Portfolio',
+            isChecked: false,
         },
         {
-            taskName: 'Make Hero Section',
-            todo: 'Make a hero section on landing page and I love to doing it',
-            time: '11.00 AM',
-            isComplete: false,
+            id: 3,
+            taskTitle: 'Submit resume',
+            todo: 'Submit resume of Economic World 2023',
+            isChecked: false,
         },
     ];
 

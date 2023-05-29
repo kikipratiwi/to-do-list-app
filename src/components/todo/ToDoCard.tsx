@@ -12,22 +12,23 @@ import {
 import { UilCheck } from '@iconscout/react-unicons';
 
 import { COLORS } from '../../constants';
+import { ToDo } from '../../store/slices/todo.slice';
+import moment from 'moment';
 
-export type ToDoCardProps = {
-    taskName: string;
-    time: string;
-    todo: string;
-    isComplete: boolean;
+export interface ToDoCardProps extends ToDo {
+    taskTitle: string;
     isFirst?: boolean;
-};
+}
 
 const ToDoCard: React.FC<ToDoCardProps> = ({
     todo,
-    taskName,
-    time,
+    taskTitle,
+    date,
+    isChecked,
     isFirst,
-    isComplete,
 }: ToDoCardProps): ReactElement => {
+    const time = moment(date).format('LT');
+
     return (
         <HStack h={isFirst ? '170px' : '125px'} spacing={4}>
             <VStack h="full">
@@ -102,13 +103,13 @@ const ToDoCard: React.FC<ToDoCardProps> = ({
                                 fontWeight={500}
                             >
                                 <Text fontStyle="italic">in task</Text>
-                                <Text>{taskName}</Text>
+                                <Text>{taskTitle}</Text>
                             </HStack>
 
                             <IconButton
                                 borderRadius={12}
                                 variant="outline"
-                                bgColor={isComplete ? COLORS.yellow : 'white'}
+                                bgColor={isChecked ? COLORS.yellow : 'white'}
                                 aria-label="Check"
                                 outline={12}
                                 icon={<UilCheck />}
