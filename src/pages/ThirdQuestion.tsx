@@ -26,11 +26,14 @@ import { withDisclosure } from '../hocs';
 import { withDisclosureType } from '../hocs/withDisclosure';
 
 // eslint-disable-next-line react-refresh/only-export-components
-function ThirdQuestionPage({
-    isOpen: isCreateTaskModalOpen,
-    open: openCreateTaskModal,
-    close: closeCreateTaskModal,
-}: withDisclosureType): ReactElement {
+function ThirdQuestionPage(
+    props: Record<string, any> & withDisclosureType,
+): ReactElement {
+    const {
+        open: openCreateTaskModal,
+        close: closeCreateTaskModal,
+        isOpen: isCreateTaskModalOpen,
+    } = props;
     const tasks = useAppSelector((state) => state.task.tasks);
 
     return (
@@ -137,8 +140,10 @@ function ThirdQuestionPage({
             </VStack>
 
             <CreateTaskModal
-                isOpen={isCreateTaskModalOpen}
-                onClose={closeCreateTaskModal}
+                isOpen={isCreateTaskModalOpen || false}
+                onClose={() =>
+                    closeCreateTaskModal ? closeCreateTaskModal() : {}
+                }
             />
         </HStack>
     );

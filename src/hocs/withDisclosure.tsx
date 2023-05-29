@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 export type withDisclosureType = {
-    isOpen: boolean;
-    open: () => void;
-    close: () => void;
+    isOpen?: boolean;
+    open?: () => void;
+    close?: () => void;
 };
 
 const withDisclosure = <Props,>(PassedComponent: React.FC<Props>) => {

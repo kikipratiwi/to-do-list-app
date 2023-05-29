@@ -35,9 +35,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     const [description, setDescription] = useState<string>();
 
     const {
-        isOpen: isCreateToDoOpen,
-        onOpen: onOpenCreateToDo,
-        onClose: onCloseCreateToDo,
+        isOpen: isCreateToDoOpen = false,
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        onOpen: onOpenCreateToDo = () => {},
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        onClose: onCloseCreateToDo = () => {},
     } = useDisclosure();
 
     const setInputValue = (
