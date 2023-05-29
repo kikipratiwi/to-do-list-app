@@ -39,7 +39,7 @@ const CreateTaskModal: React.FC<DetailTaskProps> = ({
     const dispatch = useAppDispatch();
 
     const progress = totalCompletedTask
-        ? (totalCompletedTask / totalTask) * 100
+        ? Number(((totalCompletedTask / totalTask) * 100).toFixed(0))
         : 0;
 
     const updateToDoStatus = (todoId: number) => {

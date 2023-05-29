@@ -25,7 +25,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
     onClose,
 }: CreateToDoModalProps): ReactElement => {
     const [todo, setToDo] = useState<string>();
-    const [dateTime, setDateTime] = useState<string>();
+    const [dateTime, setDateTime] = useState<string | null>(null);
 
     const dispatch = useAppDispatch();
 
@@ -39,7 +39,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
     const saveToTemporaryStorage = () => {
         if (!todo) return;
         dispatch(
-            addToDo({ id: 0, todo: todo, date: dateTime, isChecked: true }),
+            addToDo({ id: 0, todo: todo, date: dateTime, isChecked: false }),
         );
         onClose();
     };

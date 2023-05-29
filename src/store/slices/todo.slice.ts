@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export interface ToDo {
     id: number;
     todo: string;
-    date?: string;
+    date?: string | null;
     isChecked?: boolean;
 }
 

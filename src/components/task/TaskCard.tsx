@@ -87,6 +87,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
                             />
                             <MenuList w="50px" color="black">
                                 <MenuItem>Edit</MenuItem>
+                                <MenuItem>Archive</MenuItem>
                                 <MenuItem onClick={onOpen}>Delete</MenuItem>
                             </MenuList>
                         </Menu>

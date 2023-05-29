@@ -139,6 +139,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                                 <FormLabel>Your To do(s)</FormLabel>
 
                                 <ToDoList
+                                    isTemporary
                                     todos={todos}
                                     onChange={(id) =>
                                         removeToDoFromTemporaryStorage(id)

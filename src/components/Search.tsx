@@ -33,6 +33,7 @@ const Search: React.FC = (): ReactElement => {
     } = useDisclosure();
 
     const [searchText, setSearchText] = useState<string>('');
+    const [selectedTaskId, setSelectedTaskId] = useState<number>();
     const [selectedTask, setSelectedTask] = useState<Task>({
         id: 0,
         title: '',
@@ -42,15 +43,23 @@ const Search: React.FC = (): ReactElement => {
         totalTask: 0,
     });
 
+    useEffect(() => {
+        if (selectedTaskId !== null) {
+            const _selectedTask =
+                tasks.find(({ id }) => id === selectedTaskId) || selectedTask;
+            setSelectedTask(_selectedTask);
+        }
+    }, [selectedTaskId, tasks]);
+
+    useEffect(() => {
+        if (selectedTask.title) onOpenDetailTask();
+    }, [onOpenDetailTask, selectedTask]);
+
     const regexp = new RegExp(searchText, 'i');
 
     const filteredTask = searchText
         ? tasks.filter((task) => task.title.match(regexp))
         : [];
-
-    useEffect(() => {
-        onOpenDetailTask();
-    }, [selectedTask]);
 
     return (
         <>
@@ -129,7 +138,7 @@ const Search: React.FC = (): ReactElement => {
                                         <Card
                                             key={'task-result' + index}
                                             onClick={() =>
-                                                setSelectedTask(task)
+                                                setSelectedTaskId(task.id)
                                             }
                                             cursor="pointer"
                                             variant="elevated"

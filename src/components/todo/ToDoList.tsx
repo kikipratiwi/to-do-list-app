@@ -6,6 +6,7 @@ import { ToDo } from '../../store/slices/todo.slice';
 import { COLORS } from '../../constants';
 
 interface ToDoListProps {
+    isTemporary?: boolean;
     todos: ToDo[];
     onChange: (id: number) => void;
 }
@@ -13,6 +14,7 @@ interface ToDoListProps {
 const ToDoList: React.FC<ToDoListProps> = ({
     todos,
     onChange,
+    isTemporary,
 }: ToDoListProps): ReactElement => {
     return (
         <>
@@ -26,7 +28,7 @@ const ToDoList: React.FC<ToDoListProps> = ({
                                     value="naruto"
                                     colorScheme="gray"
                                     onChange={() => onChange(id)}
-                                    isChecked={isChecked}
+                                    isChecked={isTemporary ? true : isChecked}
                                 >
                                     <VStack
                                         alignItems="start"
@@ -42,8 +44,8 @@ const ToDoList: React.FC<ToDoListProps> = ({
 
                                         <Text fontSize="xs">
                                             {typeof date === 'string'
-                                                ? date
-                                                : moment(date).format('LLL')}
+                                                ? moment(date).format('LLL')
+                                                : 'Unspecified time'}
                                         </Text>
                                     </VStack>
                                 </Checkbox>

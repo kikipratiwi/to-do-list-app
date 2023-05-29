@@ -20,24 +20,29 @@ const MyTasks: React.FC = (): ReactElement => {
                 </ButtonGroup>
             </HStack>
 
-            <VStack
-                alignItems="start"
-                w="full"
-                flex={1}
-                spacing={5}
-                p={3}
-                pr={10}
-                maxHeight="358px"
-                overflowY="auto"
-            >
-                {tasks?.length > 0 ? (
-                    tasks.map(
+            {tasks?.length > 0 ? (
+                <VStack
+                    alignItems="start"
+                    w="full"
+                    flex={1}
+                    spacing={5}
+                    p={3}
+                    pr={10}
+                    maxHeight="358px"
+                    overflowY="auto"
+                >
+                    {tasks.map(
                         (
                             { totalCompletedTask, totalTask, ...rest },
                             index: number,
                         ) => {
                             const progress = totalCompletedTask
-                                ? (totalCompletedTask / totalTask) * 100
+                                ? Number(
+                                      (
+                                          (totalCompletedTask / totalTask) *
+                                          100
+                                      ).toFixed(0),
+                                  )
                                 : 0;
                             return (
                                 <TaskCard
@@ -50,13 +55,13 @@ const MyTasks: React.FC = (): ReactElement => {
                                 />
                             );
                         },
-                    )
-                ) : (
-                    <Text fontSize="sm" fontStyle="italic" color={COLORS.gray}>
-                        Your dont't have any tasks
-                    </Text>
-                )}
-            </VStack>
+                    )}
+                </VStack>
+            ) : (
+                <Text fontSize="sm" fontStyle="italic" color={COLORS.gray}>
+                    Your don't have any tasks
+                </Text>
+            )}
         </VStack>
     );
 };
